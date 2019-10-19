@@ -47,17 +47,11 @@ class ViewController: UIViewController {
         textFieldDidEndEditing(blueTextField)
     }
     
-    func setColor() {
+    private func setColor() {
         mainView.backgroundColor = UIColor(red: CGFloat(redSlider.value),
                                            green: CGFloat(greenSlider.value),
                                            blue: CGFloat(blueSlider.value),
                                            alpha: 1)
-    }
-    
-    private func setValueForLabel() {
-        redLabel.text = String(format: "%.2f", redSlider.value)
-        greenLabel.text = String(format: "%.2f", greenSlider.value)
-        blueLabel.text = String(format: "%.2f", blueSlider.value)
     }
     
     func setValueForTextField() {
@@ -66,12 +60,19 @@ class ViewController: UIViewController {
         blueTextField.text = string(from: blueSlider)
     }
     
+    private func setValueForLabel() {
+        redLabel.text = string(from: redSlider)
+        greenLabel.text = string(from: greenSlider)
+        blueLabel.text = string(from: blueSlider)
+    }
+    
     private func string(from slider: UISlider) -> String {
         return String(format: "%.2f", slider.value)
     }
 }
 
-extension ViewController: UISearchTextFieldDelegate {
+// MARK: - UITextFieldDelegate
+extension ViewController: UITextFieldDelegate {
     
     // Скрываем клавиатуру нажатием на "Done"
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -79,7 +80,7 @@ extension ViewController: UISearchTextFieldDelegate {
         return true
     }
     
-    // Скрытие клавиатуры по тапу за пределами Text View
+    // Скрытие клавиатуры по тапу за пределами TextView
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
@@ -104,6 +105,7 @@ extension ViewController: UISearchTextFieldDelegate {
         setValueForLabel()
     }
 }
+
 
 extension ViewController {
     
